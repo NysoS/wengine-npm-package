@@ -1,17 +1,28 @@
+/**
+ * @author Kristofer Ledoux (NysoS) <k.ledoux.dev@gmail.com>
+ * @copyright Kristofer Ledoux 2023
+ * Github: https://github.com/NysoS/NysoS
+ */ 
+
 import Vector2D from "./Engine/Math/Vector2D";
 
 export default class Game
 {
-    private canvas: HTMLElement | null = null;
-    private ctx: HTMLCanvasElement | null = null;
+    private canvas: HTMLCanvasElement | null = null;
+    private ctx: CanvasRenderingContext2D | null = null;
     private static gameSize: Vector2D = new Vector2D();
 
-    private name: String = "Default name";
-    private width: Number = 800;
-    private height: Number = 600;
+    private name: string = "Default name";
+    private width: number = 800;
+    private height: number = 600;
 
-    constructor(name: String, width: Number, height: Number, fullScreen: boolean = false)
+    imageInit = new Image(10,10);
+
+    constructor(name: string|null, width: number = 800, height: number = 600, fullScreen: boolean = false)
     {
+        if (name) {
+            this.name = name;
+        }
         if (!fullScreen) {
             this.width = width;
             this.height = height;   
@@ -19,6 +30,21 @@ export default class Game
             this.width = window.innerWidth;
             this.height = window.innerHeight;
         }
+
+        this.initCanvas();
+    }
+
+    initCanvas() {
+        if (!document.querySelector('#game')) {
+            let canvas = document.createElement("canvas");
+            canvas.setAttribute("id", "game");
+            document.getElementById("app")?.appendChild(canvas);
+        }
+
+        this.canvas = <HTMLCanvasElement>document.getElementById("game");
+        this.ctx = <CanvasRenderingContext2D>this.canvas?.getContext('2d');
+        this.canvas.width = this.width;
+        this.canvas.height = this.height;
     }
 
     static getGameSize(): Vector2D
@@ -39,7 +65,11 @@ export default class Game
     }
 
     draw() {
-        
+        this.clear();
+    }
+
+    clear() {
+        this.ctx?.clearRect(0, 0, this.width, this.height);
     }
 
     stop() {
