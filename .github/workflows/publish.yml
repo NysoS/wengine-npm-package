@@ -1,0 +1,25 @@
+name: Publish
+
+on: 
+  pull_request:
+    types:
+      - closed
+    branches:
+      - 'main'
+   
+jobs:
+  if_merged:
+   if: github.event.pull_request.merged == true
+   runs-on: ubuntu-latest
+   steps:
+     - name: checkout
+       uses: actions/checkout@v3
+     - name: node
+       uses: actions/setup-node@v3
+       with:
+         node-version: 18
+         registry-url: https://registry.npmjs.org
+     - name: publish
+       run: npm publish --access public
+       env:
+        NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
