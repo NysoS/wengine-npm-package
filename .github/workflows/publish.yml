@@ -12,14 +12,7 @@ on:
       - main
    
 jobs:
-  update_version:
-    if: ${{ github.head_ref == 'refs/heads/fix' }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: minor version
-        run: npm version patch     
   publish:
-   if: github.event.pull_request.merged == true
    runs-on: ubuntu-latest
    steps:
      - name: checkout
@@ -34,8 +27,12 @@ jobs:
        run: npm version major
      - name: minor version
        if: ${{ github.head_ref == 'refs/heads/dev' }}
-       run: npm version minor       
+       run: npm version minor   
+     - name: patch version
+       if: ${{ github.head_ref == 'refs/heads/fix' }}
+       run: npm version patch       
      - name: publish
+       if: github.event.pull_request.merged == true
        run: npm publish --access public
        env:
         NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
