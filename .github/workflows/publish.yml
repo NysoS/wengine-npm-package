@@ -5,7 +5,8 @@ on:
     types:
       - closed
     branches:
-      - ['dev', main']
+      - dev
+      - main
    
 jobs:
   if_merged:
