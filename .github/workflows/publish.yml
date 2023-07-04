@@ -25,10 +25,10 @@ jobs:
      - name: install node
        run: npm install
      - name: major version
-       if: github.ref == 'refs/heads/main'
+       if: github.base_ref == 'refs/heads/main'
        run: npm version major --no-git-tag-version 
      - name: minor version
-       if: github.ref == 'refs/heads/dev'
+       if: github.base_ref == 'refs/heads/dev'
        run: npm version minor --no-git-tag-version 
      - name: patch version
        if: github.ref == 'refs/heads/fix'
