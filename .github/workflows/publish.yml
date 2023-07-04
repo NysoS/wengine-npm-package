@@ -34,7 +34,7 @@ jobs:
        run: npm version minor   
      - name: patch version
        if: github.ref == 'refs/heads/fix'
-       run: npm version patch       
+       run: npm version patch --no-git-tag-version 
      - name: publish
        if: github.event.pull_request.merged == true
        run: npm publish --access public
