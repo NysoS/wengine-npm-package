@@ -25,13 +25,12 @@ jobs:
      - name: install node
        run: npm install
      - name: d
-       if: github.event.pull_request.base_ref == 'refs/heads/dev'
-       run: echo "dev"
+       run: echo "${{github.event.pull_request.base_ref}}"
      - name: major version
        if: github.event.pull_request.base_ref == 'refs/heads/main'
        run: npm version major --no-git-tag-version 
      - name: minor version
-       if: github.event.pull_request.base.ref == 'refs/heads/dev'
+       if: github.event.pull_request.base_ref == 'refs/heads/dev'
        run: npm version minor --no-git-tag-version 
      - name: patch version
        if: github.ref == 'refs/heads/fix'
