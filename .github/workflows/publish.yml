@@ -5,7 +5,7 @@ on:
     types:
       - closed
     branches:
-      - 'main'
+      - ['dev', main']
    
 jobs:
   if_merged:
@@ -19,6 +19,12 @@ jobs:
        with:
          node-version: 18
          registry-url: https://registry.npmjs.org
+     - name: major version
+       if: github.ref == 'refs/heads/main'
+       run: npm version major
+     - name: minor version
+       if: github.ref == 'refs/heads/dev'
+       run: npm version minor      
      - name: publish
        run: npm publish --access public
        env:
