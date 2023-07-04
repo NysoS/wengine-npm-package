@@ -1,6 +1,9 @@
 name: Publish
 
 on: 
+  push:
+    branches:
+      - feature/*
   pull_request:
     types:
       - closed
@@ -10,7 +13,6 @@ on:
    
 jobs:
   publish:
-   if: github.event.pull_request.merged == true
    runs-on: ubuntu-latest
    steps:
      - name: checkout
@@ -20,13 +22,19 @@ jobs:
        with:
          node-version: 18
          registry-url: https://registry.npmjs.org
+     - name: install node
+       run: npm install
      - name: major version
-       if: ${{ github.ref == 'refs/heads/main' }}
-       run: npm version major
+       if: github.ref == 'refs/heads/main'
+       run: npm version major --no-git-tag-version 
      - name: minor version
-       if: ${{ github.ref == 'refs/heads/dev' }}
-       run: npm version minor      
+       if: github.ref == 'refs/heads/dev'
+       run: npm version minor --no-git-tag-version 
+     - name: patch version
+       if: github.ref == 'refs/heads/fix'
+       run: npm version patch --no-git-tag-version 
      - name: publish
+       if: github.event.pull_request.merged == true
        run: npm publish --access public
        env:
         NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
