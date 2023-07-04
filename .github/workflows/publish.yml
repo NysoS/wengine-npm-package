@@ -25,7 +25,7 @@ jobs:
      - name: install node
        run: npm install
      - name: d
-       run: echo "${{github.event.pull_request.base_ref}}"
+       run: echo "${{github.event.pull_request.base.ref}}"
      - name: major version
        if: github.event.pull_request.base_ref == 'refs/heads/main'
        run: npm version major --no-git-tag-version 
