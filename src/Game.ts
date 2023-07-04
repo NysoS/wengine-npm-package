@@ -5,6 +5,7 @@
  */ 
 
 import InputHandler from "./Engine/Inputs/InputHandler";
+import InputMap from "./Engine/Inputs/InputMap";
 import Vector2D from "./Engine/Math/Vector2D";
 
 export default class Game
@@ -68,6 +69,9 @@ export default class Game
 
     start() {
         this.isGameStarted = true;
+        this.inputHandler?.bindAction(new InputMap('z', this.debugCallbackInputBind.bind(this, 5)));
+        this.inputHandler?.bindAction(new InputMap('s', this.debugCallbackInputBind.bind(this, 10)));
+        
         this.update();
     }
 
@@ -94,5 +98,10 @@ export default class Game
     stop() {
         this.isGameStarted = false;
         console.log("Stop Game...");
+    }
+
+    debugCallbackInputBind(value:number) {
+        console.log("callback method");
+        console.log(`Value : ${value}`);
     }
 }
