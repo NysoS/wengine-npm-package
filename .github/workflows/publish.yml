@@ -22,6 +22,8 @@ jobs:
        with:
          node-version: 18
          registry-url: https://registry.npmjs.org
+     - name: install node
+       run: npm install
      - name: debug
        run: echo ${{ github.head_ref }}
      - name: major version
