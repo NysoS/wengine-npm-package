@@ -1,4 +1,9 @@
 "use strict";
+/**
+* @author Kristofer Ledoux (NysoS) <k.ledoux.dev@gmail.com>
+* @copyright Kristofer Ledoux 2023
+* Github: https://github.com/NysoS/NysoS
+*/
 Object.defineProperty(exports, "__esModule", { value: true });
 class Vector2D {
     constructor(x = 0, y = 0) {

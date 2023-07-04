@@ -1,3 +1,9 @@
+/**
+* @author Kristofer Ledoux (NysoS) <k.ledoux.dev@gmail.com>
+* @copyright Kristofer Ledoux 2023
+* Github: https://github.com/NysoS/NysoS
+*/
+
 import Game from "../../Game";
 import InputMap from "./InputMap";
 
@@ -11,7 +17,7 @@ export default class InputHandler
         this.gameCtx = gameContext;
     }
 
-    initInput() {
+    initInput() {       
         window.addEventListener('keydown', event => {
             if (this.inputsMap.find(input => input.getKey() === event.key)
                 && this.inputsQueue.indexOf(event.key) === -1
@@ -32,10 +38,12 @@ export default class InputHandler
     }
 
     updateInputs() {
-        for (let key in this.inputsQueue) {
-            let inputMap = this.inputsMap.find(input => input.getKey() === key);
-            if (inputMap) {
-                inputMap.invoke();
+        for (let indexkey in this.inputsQueue) {
+            if (this.inputsQueue[indexkey]) {
+                let inputMap = this.inputsMap.find(input => input.getKey() === this.inputsQueue[indexkey]);
+                if (inputMap) {
+                    inputMap.invoke();
+                }   
             }
         }
     }

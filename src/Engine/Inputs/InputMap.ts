@@ -1,3 +1,9 @@
+/**
+* @author Kristofer Ledoux (NysoS) <k.ledoux.dev@gmail.com>
+* @copyright Kristofer Ledoux 2023
+* Github: https://github.com/NysoS/NysoS
+*/
+
 export default class InputMap {
     private key: String = '';
     private callback: Function | null = null;
@@ -11,7 +17,7 @@ export default class InputMap {
         return this.key;
     }
 
-    invoke() {
+    invoke() {       
         this.callback?.call(this);
     }
 }

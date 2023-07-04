@@ -1,6 +1,6 @@
 {
   "name": "@nysos/wengine",
-  "version": "0.0.17",
+  "version": "0.0.25",
   "description": "Web game engine package",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

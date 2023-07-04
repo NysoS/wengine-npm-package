@@ -130,5 +130,5 @@ dist
 .pnp.*
 
 # build files
-.*.js
-.*.d.ts
+*.js
+*.d.ts
