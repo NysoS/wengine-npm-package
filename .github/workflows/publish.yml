@@ -31,7 +31,7 @@ jobs:
        if: ${{ github.head_ref == 'refs/heads/dev' }}
        run: npm version minor   
      - name: patch version
-       if: github.head_ref == 'refs/heads/fix'
+       if: github.ref == 'refs/heads/fix'
        run: npm version patch       
      - name: publish
        if: github.event.pull_request.merged == true
