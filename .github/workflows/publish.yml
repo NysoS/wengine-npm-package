@@ -1,6 +1,9 @@
 name: Publish
 
 on: 
+  push:
+    branches:
+      - fix
   pull_request:
     types:
       - closed
@@ -26,6 +29,9 @@ jobs:
      - name: minor version
        if: ${{ github.head_ref == 'refs/heads/dev' }}
        run: npm version minor      
+     - name: minor version
+       if: ${{ github.head_ref == 'refs/heads/fix' }}
+       run: npm version patch      
      - name: publish
        run: npm publish --access public
        env:
