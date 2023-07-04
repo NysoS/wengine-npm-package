@@ -4,6 +4,7 @@
  * Github: https://github.com/NysoS/NysoS
  */ 
 
+import InputHandler from "./Engine/Inputs/InputHandler";
 import Vector2D from "./Engine/Math/Vector2D";
 
 export default class Game
@@ -19,6 +20,8 @@ export default class Game
     private isGameStarted: boolean = false;
     private gameId: number = 0;
 
+    private inputHandler: InputHandler | null = null;
+
     constructor(name: string|null, width: number = 800, height: number = 600, fullScreen: boolean = false)
     {
         if (name) {
@@ -33,6 +36,8 @@ export default class Game
         }
 
         this.initCanvas();
+        
+        this.inputHandler = new InputHandler(this);
     }
 
     initCanvas() {
@@ -55,6 +60,9 @@ export default class Game
 
     init() {
         console.log("Init Game...");
+
+        this.inputHandler?.initInput();
+
         this.start();
     }
 
@@ -68,6 +76,9 @@ export default class Game
             if (!this.isGameStarted) { 
                 window.cancelAnimationFrame(this.gameId);
             }
+
+            this.inputHandler?.updateInputs();
+
             this.update();
         });
     }
