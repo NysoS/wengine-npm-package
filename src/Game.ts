@@ -16,7 +16,8 @@ export default class Game
     private width: number = 800;
     private height: number = 600;
 
-    imageInit = new Image(10,10);
+    private isGameStarted: boolean = false;
+    private gameId: number = 0;
 
     constructor(name: string|null, width: number = 800, height: number = 600, fullScreen: boolean = false)
     {
@@ -53,15 +54,22 @@ export default class Game
     }
 
     init() {
-        
+        console.log("Init Game...");
+        this.start();
     }
 
     start() {
-        
+        this.isGameStarted = true;
+        this.update();
     }
 
     update() {
-        
+        this.gameId = window.requestAnimationFrame(() => {
+            if (!this.isGameStarted) { 
+                window.cancelAnimationFrame(this.gameId);
+            }
+            this.update();
+        });
     }
 
     draw() {
@@ -73,6 +81,7 @@ export default class Game
     }
 
     stop() {
-        
+        this.isGameStarted = false;
+        console.log("Stop Game...");
     }
 }
