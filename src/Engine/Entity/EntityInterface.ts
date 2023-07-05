@@ -4,6 +4,8 @@
 * Github: https://github.com/NysoS/NysoS
 */
 
+import Component from "../GamePlay/Component/Component";
+
 export default interface EntityInterface
 {
     getName(): String;
@@ -16,7 +18,7 @@ export default interface EntityInterface
 
     destroy(): void;
 
-    addComponent<T>(): T;
+    addComponent<T extends Component>(comp: {new() : T }, name:string|null): T;
 
-    getComponent<T>(): T;
+    getComponent<T extends Component>(comp: T): T;
 }

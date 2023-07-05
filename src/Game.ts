@@ -7,6 +7,7 @@
 import EntityManager from "./Engine/Entity/EntityManager";
 import InputHandler from "./Engine/Inputs/InputHandler";
 import Vector2D from "./Engine/Math/Vector2D";
+import RendererManager from "./Engine/Renderer/RendererManager";
 
 export default class Game
 {
@@ -22,7 +23,8 @@ export default class Game
     private gameId: number = 0;
 
     private inputHandler: InputHandler | null = null;
-    private entityManager: EntityManager = new EntityManager();
+    public entityManager: EntityManager = new EntityManager();
+    private rendererManager: RendererManager = RendererManager.getInstance();
 
     constructor(name: string|null, width: number = 800, height: number = 600, fullScreen: boolean = false)
     {
@@ -83,6 +85,7 @@ export default class Game
 
             this.inputHandler?.updateInputs();
             this.entityManager.updateEntities();
+            this.draw();
 
             this.update();
         });
@@ -90,6 +93,7 @@ export default class Game
 
     draw() {
         this.clear();
+        this.rendererManager.renderer(<CanvasRenderingContext2D>this.ctx);
     }
 
     clear() {

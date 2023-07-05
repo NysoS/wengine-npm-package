@@ -4,18 +4,12 @@
 * Github: https://github.com/NysoS/NysoS
 */
 
-import EntityInterface from "../../Entity/EntityInterface";
+import Entity from "./Entity";
 
-export default class GameObject implements EntityInterface
+export default class GameObject extends Entity
 {
-    private name: String = "GameObject";
-
-    constructor(name: String) {
-        this.name = name;
-    }
-    
-    getName(): String {
-        return this.name;
+    constructor(name: String = 'GameObject') {
+        super(name);
     }
 
     init(): void {
@@ -32,13 +26,5 @@ export default class GameObject implements EntityInterface
 
     destroy(): void {
         
-    }
-
-    addComponent<T>(): T {
-        throw new Error("Method not implemented.");
-    }
-
-    getComponent<T>(): T {
-        throw new Error("Method not implemented.");
     }
 }
