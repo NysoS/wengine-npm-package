@@ -4,6 +4,7 @@
  * Github: https://github.com/NysoS/NysoS
  */ 
 
+import EntityManager from "./Engine/Entity/EntityManager";
 import InputHandler from "./Engine/Inputs/InputHandler";
 import Vector2D from "./Engine/Math/Vector2D";
 
@@ -21,6 +22,7 @@ export default class Game
     private gameId: number = 0;
 
     private inputHandler: InputHandler | null = null;
+    private entityManager: EntityManager = new EntityManager();
 
     constructor(name: string|null, width: number = 800, height: number = 600, fullScreen: boolean = false)
     {
@@ -79,6 +81,7 @@ export default class Game
             }
 
             this.inputHandler?.updateInputs();
+            this.entityManager.updateEntities(<CanvasRenderingContext2D>this.ctx);
 
             this.update();
         });

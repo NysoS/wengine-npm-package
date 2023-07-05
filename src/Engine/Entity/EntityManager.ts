@@ -1,3 +1,9 @@
+/**
+* @author Kristofer Ledoux (NysoS) <k.ledoux.dev@gmail.com>
+* @copyright Kristofer Ledoux 2023
+* Github: https://github.com/NysoS/NysoS
+*/
+
 import EntityInterface from "./EntityInterface";
 
 export default class EntityManager
@@ -26,10 +32,11 @@ export default class EntityManager
             entity.start();
         }
     }
-
-    updateEntities(): void{
+    //TODO: remove ctx
+    updateEntities(ctx: CanvasRenderingContext2D): void{
         for (let entity of this.entities) {
             entity.update();
+            entity.draw(ctx);
         }
     }
 
