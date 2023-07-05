@@ -5,7 +5,6 @@
  */ 
 
 import EntityManager from "./Engine/Entity/EntityManager";
-import GameObject from "./Engine/GamePlay/Entity/GameObject";
 import InputHandler from "./Engine/Inputs/InputHandler";
 import Vector2D from "./Engine/Math/Vector2D";
 
@@ -65,9 +64,7 @@ export default class Game
         console.log("Init Game...");
 
         this.inputHandler?.initInput();
-
-        this.entityManager.addEntity(new GameObject("Pomme"));
-        console.log(this.entityManager);
+        this.entityManager.initEntities();
         
         this.start();
     }
@@ -85,7 +82,7 @@ export default class Game
             }
 
             this.inputHandler?.updateInputs();
-            this.entityManager.updateEntities(<CanvasRenderingContext2D>this.ctx);
+            this.entityManager.updateEntities();
 
             this.update();
         });

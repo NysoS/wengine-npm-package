@@ -32,11 +32,10 @@ export default class EntityManager
             entity.start();
         }
     }
-    //TODO: remove ctx
-    updateEntities(ctx: CanvasRenderingContext2D): void{
+
+    updateEntities(): void{
         for (let entity of this.entities) {
             entity.update();
-            entity.draw(ctx);
         }
     }
 

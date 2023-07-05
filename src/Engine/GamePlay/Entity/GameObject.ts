@@ -1,3 +1,9 @@
+/**
+* @author Kristofer Ledoux (NysoS) <k.ledoux.dev@gmail.com>
+* @copyright Kristofer Ledoux 2023
+* Github: https://github.com/NysoS/NysoS
+*/
+
 import EntityInterface from "../../Entity/EntityInterface";
 
 export default class GameObject implements EntityInterface
@@ -7,17 +13,13 @@ export default class GameObject implements EntityInterface
     constructor(name: String) {
         this.name = name;
     }
-
-    img = new Image(30, 30);
     
     getName(): String {
         return this.name;
     }
 
     init(): void {
-        this.img.onload = () => {
-            this.img.src = "./public/image/blob.svg";    
-        }
+
     }
 
     start(): void {
@@ -26,10 +28,6 @@ export default class GameObject implements EntityInterface
 
     update(): void {
         
-    }
-
-    draw(ctx: CanvasRenderingContext2D): void {
-        ctx.drawImage(this.img, 150, 150);
     }
 
     destroy(): void {

@@ -14,8 +14,6 @@ export default interface EntityInterface
 
     update(): void;
 
-    draw(ctx: CanvasRenderingContext2D): void;
-
     destroy(): void;
 
     addComponent<T>(): T;
