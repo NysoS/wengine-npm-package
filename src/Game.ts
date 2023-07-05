@@ -5,6 +5,7 @@
  */ 
 
 import EntityManager from "./Engine/Entity/EntityManager";
+import GameObject from "./Engine/GamePlay/Entity/GameObject";
 import InputHandler from "./Engine/Inputs/InputHandler";
 import Vector2D from "./Engine/Math/Vector2D";
 
@@ -65,6 +66,9 @@ export default class Game
 
         this.inputHandler?.initInput();
 
+        this.entityManager.addEntity(new GameObject("Pomme"));
+        console.log(this.entityManager);
+        
         this.start();
     }
 
