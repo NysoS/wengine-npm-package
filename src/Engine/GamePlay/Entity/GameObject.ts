@@ -13,18 +13,18 @@ export default class GameObject extends Entity
     }
 
     init(): void {
-
+        super.init();
     }
 
     start(): void {
-       
+        super.start();
     }
 
     update(): void {
-        
+        super.update();
     }
 
     destroy(): void {
-        
+        super.destroy();
     }
 }

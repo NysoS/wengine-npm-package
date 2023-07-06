@@ -4,16 +4,18 @@
 * Github: https://github.com/NysoS/NysoS
 */
 
+import Game from "../../Game";
 import EntityInterface from "./EntityInterface";
 
 export default class EntityManager
 {
     private entities: Array<EntityInterface> = new Array();
     
-    constructor(){
+    constructor(private game:Game){
     }
 
     addEntity(entity: EntityInterface) {
+        entity.setGameContext(this.game);
         this.entities.push(entity);
     }
 

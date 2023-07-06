@@ -9,10 +9,7 @@ import ComponentInterface from "./ComponentInterface";
 
 export default abstract class Component implements ComponentInterface
 {
-    private name: string = "Component";
-
-    constructor(private entity: Entity, name: string) {
-        this.name = name;
+    constructor(private entity: Entity, private name: string = "Component") {
     }
 
     getName(): string {
@@ -24,7 +21,7 @@ export default abstract class Component implements ComponentInterface
     }
 
     initComponent(): void {
-        throw new Error("Method not implemented.");
+        
     }
 
     destroyComponent(): void {

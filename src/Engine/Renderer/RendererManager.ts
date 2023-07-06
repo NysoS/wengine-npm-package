@@ -4,7 +4,7 @@
 * Github: https://github.com/NysoS/NysoS
 */
 
-import Component from "../GamePlay/Component/Component";
+import Game from "../../Game";
 import SpriteRenderer from "../GamePlay/Component/SpriteRenderer";
 
 export default class RendererManager
@@ -12,28 +12,15 @@ export default class RendererManager
     private static instance: RendererManager|null = null;
     private sprites: Array<SpriteRenderer> = new Array();
 
-    constructor() {        
+    constructor(private game:Game) {        
     }
 
-    static getInstance(): RendererManager
-    {
-        if (!RendererManager.instance) {
-            RendererManager.instance = new RendererManager();
-        }
-        
-        return RendererManager.instance;
+    addRendererEntity(sprite: SpriteRenderer) {
+        this.sprites.push(sprite);
     }
 
-    addRendererEntity(sprite: Component) {
-        if (sprite instanceof SpriteRenderer) {
-            this.sprites.push(<SpriteRenderer>sprite);
-        }
-    }
-
-    removeRendererEntity(sprite: Component) {
-        if (sprite instanceof SpriteRenderer) {
-            this.sprites.splice(this.sprites.indexOf(<SpriteRenderer>sprite), 1);
-        }
+    removeRendererEntity(sprite: SpriteRenderer) {
+        this.sprites.splice(this.sprites.indexOf(sprite), 1);
     }
 
     renderer(ctx: CanvasRenderingContext2D) {

@@ -4,6 +4,7 @@
 * Github: https://github.com/NysoS/NysoS
 */
 
+import Game from "../../Game";
 import Component from "../GamePlay/Component/Component";
 
 export default interface EntityInterface
@@ -21,4 +22,6 @@ export default interface EntityInterface
     addComponent<T extends Component>(comp: {new() : T }, name:string|null): T;
 
     getComponent<T extends Component>(comp: T): T;
+
+    setGameContext(game: Game): void;
 }

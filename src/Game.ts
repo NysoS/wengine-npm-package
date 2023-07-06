@@ -23,8 +23,8 @@ export default class Game
     private gameId: number = 0;
 
     private inputHandler: InputHandler | null = null;
-    public entityManager: EntityManager = new EntityManager();
-    private rendererManager: RendererManager = RendererManager.getInstance();
+    public entityManager: EntityManager = new EntityManager(this);
+    public rendererManager: RendererManager = new RendererManager(this);
 
     constructor(name: string|null, width: number = 800, height: number = 600, fullScreen: boolean = false)
     {

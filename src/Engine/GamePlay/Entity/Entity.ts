@@ -4,8 +4,8 @@
 * Github: https://github.com/NysoS/NysoS
 */
 
+import Game from "../../../Game";
 import EntityInterface from "../../Entity/EntityInterface";
-import RendererManager from "../../Renderer/RendererManager";
 import Component from "../Component/Component";
 
 export default abstract class Entity implements EntityInterface {
@@ -13,9 +13,14 @@ export default abstract class Entity implements EntityInterface {
     private name: String = "entity";
     protected tickableEntity = false;
     private components: Array<Component> = new Array();
+    public game: Game | null = null;
 
     constructor(name: String) {
         this.name = name;
+    }
+
+    setGameContext(game: Game): void {
+        this.game = game;
     }
 
     getName(): String {
@@ -23,7 +28,9 @@ export default abstract class Entity implements EntityInterface {
     }
 
     init(): void {
-
+        for (let comp of this.components) {
+            comp.initComponent();
+        }
     }
 
     start(): void {
@@ -38,9 +45,9 @@ export default abstract class Entity implements EntityInterface {
 
     }
 
-    addComponent<T extends Component>(comp: { new(entity: Entity, name: string | null): T }, name: string | null): T {
-        let newComp = new comp(this, name);
-        RendererManager.getInstance().addRendererEntity(newComp);
+    addComponent<T extends Component>(comp: { new(entity: Entity): T }): T {
+        let newComp = new comp(this);
+        this.components.push(newComp);
         return newComp;
     }
 

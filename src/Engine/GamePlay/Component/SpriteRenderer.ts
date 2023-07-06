@@ -12,17 +12,24 @@ export default class SpriteRenderer extends Component implements SpriteRendererI
 {
     private sprite: HTMLImageElement = new Image();
 
-    constructor(entity: Entity, name:string = "SpriteRenderer") {
-        super(entity, name);
+    constructor(entity: Entity, name:string|null = "SpriteRenderer") {
+        super(entity, name = "");
     }
 
     setDrawable(sprite: HTMLImageElement) {
         this.sprite = sprite;
     }
 
-    renderer(ctx: CanvasRenderingContext2D): void {
+    initComponent(): void{
+        super.initComponent();
+        console.log(this.getEntity()?.game);
+        
         this.sprite.onload = () => {
-            ctx.drawImage(this.sprite, 50, 50);   
+            this.getEntity()?.game?.rendererManager.addRendererEntity(this);
         }
+    }
+
+    renderer(ctx: CanvasRenderingContext2D): void {
+        ctx.drawImage(this.sprite, 50, 50, 50, 50);   
     }
 }
