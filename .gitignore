@@ -130,6 +130,7 @@ dist
 .pnp.*
 
 # build files
+**.js
+**.d.ts
 Engine
-*.js
-*.d.ts
+!/src/Engine
